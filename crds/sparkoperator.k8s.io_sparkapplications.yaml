@@ -40,25 +40,17 @@ spec:
         properties:
           apiVersion:
             description: |-
-              APIVersion defines the versioned schema of this representation of an object.
-              Servers should convert recognized schemas to the latest internal value, and
-              may reject unrecognized values.
-              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+              APIVersion
             type: string
           kind:
             description: |-
-              Kind is a string value representing the REST resource this object represents.
-              Servers may infer this from the endpoint the client submits requests to.
-              Cannot be updated.
-              In CamelCase.
-              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+              Kind 
             type: string
           metadata:
             type: object
           spec:
             description: |-
-              SparkApplicationSpec defines the desired state of SparkApplication
-              It carries every pieces of information a spark-submit command takes and recognizes.
+              SparkApplicationSpec
             properties:
               arguments:
                 description: Arguments is a list of arguments to be passed to the
@@ -90,8 +82,7 @@ spec:
                       pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                       x-kubernetes-int-or-string: true
                     description: |-
-                      Resources stands for the resource list custom request for. Usually it is used to define the lower-bound limit.
-                      If specified, volcano scheduler will consider it as the resources requested.
+                      Resources
                     type: object
                 type: object
               deps:
@@ -99,15 +90,13 @@ spec:
                   Spark application.
                 properties:
                   archives:
-                    description: Archives is a list of archives to be extracted into
-                      the working directory of each executor.
+                    description: Archives 
                     items:
                       type: string
                     type: array
                   excludePackages:
                     description: |-
-                      ExcludePackages is a list of "groupId:artifactId", to exclude while resolving the
-                      dependencies provided in Packages to avoid dependency conflicts.
+                      ExcludePackages
                     items:
                       type: string
                     type: array
@@ -125,10 +114,7 @@ spec:
                     type: array
                   packages:
                     description: |-
-                      Packages is a list of maven coordinates of jars to include on the driver and executor
-                      classpaths. This will search the local maven repo, then maven central and any additional
-                      remote repositories given by the "repositories" option.
-                      Each package should be of the form "groupId:artifactId:version".
+                      Packages 
                     items:
                       type: string
                     type: array
@@ -140,8 +126,7 @@ spec:
                     type: array
                   repositories:
                     description: |-
-                      Repositories is a list of additional remote repositories to search for the maven coordinate
-                      given with the "packages" option.
+                      Repositories 
                     items:
                       type: string
                     type: array
@@ -159,19 +144,10 @@ spec:
                         properties:
                           preferredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              The scheduler will prefer to schedule pods to nodes that satisfy
-                              the affinity expressions specified by this field, but it may choose
-                              a node that violates one or more of the expressions. The node that is
-                              most preferred is the one with the greatest sum of weights, i.e.
-                              for each node that meets all of the scheduling requirements (resource
-                              request, requiredDuringScheduling affinity expressions, etc.),
-                              compute a sum by iterating through the elements of this field and adding
-                              "weight" to the sum if the node matches the corresponding matchExpressions; the
-                              node(s) with the highest sum are the most preferred.
+                              The scheduler 
                             items:
                               description: |-
-                                An empty preferred scheduling term matches all objects with implicit weight 0
-                                (i.e. it's a no-op). A null preferred scheduling term matches no objects (i.e. is also a no-op).
+                                An empty 
                               properties:
                                 preference:
                                   description: A node selector term, associated with
@@ -182,8 +158,7 @@ spec:
                                         by node's labels.
                                       items:
                                         description: |-
-                                          A node selector requirement is a selector that contains values, a key, and an operator
-                                          that relates the key and values.
+                                          A node
                                         properties:
                                           key:
                                             description: The label key that the selector
@@ -196,11 +171,7 @@ spec:
                                             type: string
                                           values:
                                             description: |-
-                                              An array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. If the operator is Gt or Lt, the values
-                                              array must have a single element, which will be interpreted as an integer.
-                                              This array is replaced during a strategic merge patch.
+                                              An array 
                                             items:
                                               type: string
                                             type: array
@@ -214,8 +185,7 @@ spec:
                                         by node's fields.
                                       items:
                                         description: |-
-                                          A node selector requirement is a selector that contains values, a key, and an operator
-                                          that relates the key and values.
+                                          A node 
                                         properties:
                                           key:
                                             description: The label key that the selector
@@ -228,11 +198,7 @@ spec:
                                             type: string
                                           values:
                                             description: |-
-                                              An array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. If the operator is Gt or Lt, the values
-                                              array must have a single element, which will be interpreted as an integer.
-                                              This array is replaced during a strategic merge patch.
+                                              An array 
                                             items:
                                               type: string
                                             type: array
@@ -244,8 +210,7 @@ spec:
                                   type: object
                                   x-kubernetes-map-type: atomic
                                 weight:
-                                  description: Weight associated with matching the
-                                    corresponding nodeSelectorTerm, in the range 1-100.
+                                  description: Weight 
                                   format: int32
                                   type: integer
                               required:
@@ -255,28 +220,21 @@ spec:
                             type: array
                           requiredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              If the affinity requirements specified by this field are not met at
-                              scheduling time, the pod will not be scheduled onto the node.
-                              If the affinity requirements specified by this field cease to be met
-                              at some point during pod execution (e.g. due to an update), the system
-                              may or may not try to eventually evict the pod from its node.
+                              If the affinity 
                             properties:
                               nodeSelectorTerms:
                                 description: Required. A list of node selector terms.
                                   The terms are ORed.
                                 items:
                                   description: |-
-                                    A null or empty node selector term matches no objects. The requirements of
-                                    them are ANDed.
-                                    The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
+                                    A null 
                                   properties:
                                     matchExpressions:
                                       description: A list of node selector requirements
                                         by node's labels.
                                       items:
                                         description: |-
-                                          A node selector requirement is a selector that contains values, a key, and an operator
-                                          that relates the key and values.
+                                          A node 
                                         properties:
                                           key:
                                             description: The label key that the selector
@@ -284,16 +242,11 @@ spec:
                                             type: string
                                           operator:
                                             description: |-
-                                              Represents a key's relationship to a set of values.
-                                              Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                              Represents 
                                             type: string
                                           values:
                                             description: |-
-                                              An array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. If the operator is Gt or Lt, the values
-                                              array must have a single element, which will be interpreted as an integer.
-                                              This array is replaced during a strategic merge patch.
+                                              An array
                                             items:
                                               type: string
                                             type: array
@@ -303,12 +256,10 @@ spec:
                                         type: object
                                       type: array
                                     matchFields:
-                                      description: A list of node selector requirements
-                                        by node's fields.
+                                      description: A 
                                       items:
                                         description: |-
-                                          A node selector requirement is a selector that contains values, a key, and an operator
-                                          that relates the key and values.
+                                          A node 
                                         properties:
                                           key:
                                             description: The label key that the selector
@@ -316,16 +267,11 @@ spec:
                                             type: string
                                           operator:
                                             description: |-
-                                              Represents a key's relationship to a set of values.
-                                              Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+                                              Represents 
                                             type: string
                                           values:
                                             description: |-
-                                              An array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. If the operator is Gt or Lt, the values
-                                              array must have a single element, which will be interpreted as an integer.
-                                              This array is replaced during a strategic merge patch.
+                                              An array
                                             items:
                                               type: string
                                             type: array
@@ -343,59 +289,37 @@ spec:
                             x-kubernetes-map-type: atomic
                         type: object
                       podAffinity:
-                        description: Describes pod affinity scheduling rules (e.g.
-                          co-locate this pod in the same node, zone, etc. as some
-                          other pod(s)).
+                        description: Describes 
                         properties:
                           preferredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              The scheduler will prefer to schedule pods to nodes that satisfy
-                              the affinity expressions specified by this field, but it may choose
-                              a node that violates one or more of the expressions. The node that is
-                              most preferred is the one with the greatest sum of weights, i.e.
-                              for each node that meets all of the scheduling requirements (resource
-                              request, requiredDuringScheduling affinity expressions, etc.),
-                              compute a sum by iterating through the elements of this field and adding
-                              "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
-                              node(s) with the highest sum are the most preferred.
+                              The scheduler
                             items:
-                              description: The weights of all of the matched WeightedPodAffinityTerm
-                                fields are added per-node to find the most preferred
-                                node(s)
+                              description: The 
                               properties:
                                 podAffinityTerm:
-                                  description: Required. A pod affinity term, associated
-                                    with the corresponding weight.
+                                  description: Required
                                   properties:
                                     labelSelector:
                                       description: |-
-                                        A label query over a set of resources, in this case pods.
-                                        If it's null, this PodAffinityTerm matches with no Pods.
+                                        A label
                                       properties:
                                         matchExpressions:
-                                          description: matchExpressions is a list
-                                            of label selector requirements. The requirements
-                                            are ANDed.
+                                          description: matchExpressions
                                           items:
                                             description: |-
-                                              A label selector requirement is a selector that contains values, a key, and an operator that
-                                              relates the key and values.
+                                              A label
                                             properties:
                                               key:
-                                                description: key is the label key
-                                                  that the selector applies to.
+                                                description: key
                                                 type: string
                                               operator:
                                                 description: |-
-                                                  operator represents a key's relationship to a set of values.
-                                                  Valid operators are In, NotIn, Exists and DoesNotExist.
+                                                  operator
                                                 type: string
                                               values:
                                                 description: |-
-                                                  values is an array of string values. If the operator is In or NotIn,
-                                                  the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                                  the values array must be empty. This array is replaced during a strategic
-                                                  merge patch.
+                                                  values.
                                                 items:
                                                   type: string
                                                 type: array
@@ -408,58 +332,33 @@ spec:
                                           additionalProperties:
                                             type: string
                                           description: |-
-                                            matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                            map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                            operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                            matchLabels.
                                           type: object
                                       type: object
                                       x-kubernetes-map-type: atomic
                                     matchLabelKeys:
                                       description: |-
-                                        MatchLabelKeys is a set of pod label keys to select which pods will
-                                        be taken into consideration. The keys are used to lookup values from the
-                                        incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
-                                        to select the group of existing pods which pods will be taken into consideration
-                                        for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                        pod labels will be ignored. The default value is empty.
-                                        The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                        Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                        This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                        MatchLabelKeys.
                                       items:
                                         type: string
                                       type: array
                                       x-kubernetes-list-type: atomic
                                     mismatchLabelKeys:
                                       description: |-
-                                        MismatchLabelKeys is a set of pod label keys to select which pods will
-                                        be taken into consideration. The keys are used to lookup values from the
-                                        incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                        to select the group of existing pods which pods will be taken into consideration
-                                        for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                        pod labels will be ignored. The default value is empty.
-                                        The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                        Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                        This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                        MismatchLabelKeys.
                                       items:
                                         type: string
                                       type: array
                                       x-kubernetes-list-type: atomic
                                     namespaceSelector:
                                       description: |-
-                                        A label query over the set of namespaces that the term applies to.
-                                        The term is applied to the union of the namespaces selected by this field
-                                        and the ones listed in the namespaces field.
-                                        null selector and null or empty namespaces list means "this pod's namespace".
-                                        An empty selector ({}) matches all namespaces.
+                                        A label.
                                       properties:
                                         matchExpressions:
-                                          description: matchExpressions is a list
-                                            of label selector requirements. The requirements
-                                            are ANDed.
+                                          description: matchExpressions.
                                           items:
                                             description: |-
-                                              A label selector requirement is a selector that contains values, a key, and an operator that
-                                              relates the key and values.
+                                              A label.
                                             properties:
                                               key:
                                                 description: key is the label key
@@ -467,15 +366,11 @@ spec:
                                                 type: string
                                               operator:
                                                 description: |-
-                                                  operator represents a key's relationship to a set of values.
-                                                  Valid operators are In, NotIn, Exists and DoesNotExist.
+                                                  operator.
                                                 type: string
                                               values:
                                                 description: |-
-                                                  values is an array of string values. If the operator is In or NotIn,
-                                                  the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                                  the values array must be empty. This array is replaced during a strategic
-                                                  merge patch.
+                                                  values.
                                                 items:
                                                   type: string
                                                 type: array
@@ -488,28 +383,19 @@ spec:
                                           additionalProperties:
                                             type: string
                                           description: |-
-                                            matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                            map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                            operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                            matchLabels.
                                           type: object
                                       type: object
                                       x-kubernetes-map-type: atomic
                                     namespaces:
                                       description: |-
-                                        namespaces specifies a static list of namespace names that the term applies to.
-                                        The term is applied to the union of the namespaces listed in this field
-                                        and the ones selected by namespaceSelector.
-                                        null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+                                        namespaces.
                                       items:
                                         type: string
                                       type: array
                                     topologyKey:
                                       description: |-
-                                        This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
-                                        the labelSelector in the specified namespaces, where co-located is defined as running on a node
-                                        whose value of the label with key topologyKey matches that of any node on which any of the
-                                        selected pods is running.
-                                        Empty topologyKey is not allowed.
+                                        This.
                                       type: string
                                   required:
                                   - topologyKey
@@ -527,51 +413,31 @@ spec:
                             type: array
                           requiredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              If the affinity requirements specified by this field are not met at
-                              scheduling time, the pod will not be scheduled onto the node.
-                              If the affinity requirements specified by this field cease to be met
-                              at some point during pod execution (e.g. due to a pod label update), the
-                              system may or may not try to eventually evict the pod from its node.
-                              When there are multiple elements, the lists of nodes corresponding to each
-                              podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                              If.
                             items:
                               description: |-
-                                Defines a set of pods (namely those matching the labelSelector
-                                relative to the given namespace(s)) that this pod should be
-                                co-located (affinity) or not co-located (anti-affinity) with,
-                                where co-located is defined as running on a node whose value of
-                                the label with key <topologyKey> matches that of any node on which
-                                a pod of the set of pods is running
+                                Defines
                               properties:
                                 labelSelector:
                                   description: |-
-                                    A label query over a set of resources, in this case pods.
-                                    If it's null, this PodAffinityTerm matches with no Pods.
+                                    A label.
                                   properties:
                                     matchExpressions:
-                                      description: matchExpressions is a list of label
-                                        selector requirements. The requirements are
-                                        ANDed.
+                                      description: matchExpressions.
                                       items:
                                         description: |-
-                                          A label selector requirement is a selector that contains values, a key, and an operator that
-                                          relates the key and values.
+                                          A label.
                                         properties:
                                           key:
-                                            description: key is the label key that
-                                              the selector applies to.
+                                            description: key.
                                             type: string
                                           operator:
                                             description: |-
-                                              operator represents a key's relationship to a set of values.
-                                              Valid operators are In, NotIn, Exists and DoesNotExist.
+                                              operator.
                                             type: string
                                           values:
                                             description: |-
-                                              values is an array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. This array is replaced during a strategic
-                                              merge patch.
+                                              values.
                                             items:
                                               type: string
                                             type: array
@@ -584,74 +450,44 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: |-
-                                        matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                        map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                        operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                        matchLabels.
                                       type: object
                                   type: object
                                   x-kubernetes-map-type: atomic
                                 matchLabelKeys:
                                   description: |-
-                                    MatchLabelKeys is a set of pod label keys to select which pods will
-                                    be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
-                                    to select the group of existing pods which pods will be taken into consideration
-                                    for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                    pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                    Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    MatchLabelKeys.
                                   items:
                                     type: string
                                   type: array
                                   x-kubernetes-list-type: atomic
                                 mismatchLabelKeys:
                                   description: |-
-                                    MismatchLabelKeys is a set of pod label keys to select which pods will
-                                    be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                    to select the group of existing pods which pods will be taken into consideration
-                                    for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                    pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                    Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    MismatchLabelKeys.
                                   items:
                                     type: string
                                   type: array
                                   x-kubernetes-list-type: atomic
                                 namespaceSelector:
                                   description: |-
-                                    A label query over the set of namespaces that the term applies to.
-                                    The term is applied to the union of the namespaces selected by this field
-                                    and the ones listed in the namespaces field.
-                                    null selector and null or empty namespaces list means "this pod's namespace".
-                                    An empty selector ({}) matches all namespaces.
+                                    A label.
                                   properties:
                                     matchExpressions:
-                                      description: matchExpressions is a list of label
-                                        selector requirements. The requirements are
-                                        ANDed.
+                                      description: matchExpressions.
                                       items:
                                         description: |-
-                                          A label selector requirement is a selector that contains values, a key, and an operator that
-                                          relates the key and values.
+                                          A label.
                                         properties:
                                           key:
-                                            description: key is the label key that
-                                              the selector applies to.
+                                            description: key is.
                                             type: string
                                           operator:
                                             description: |-
-                                              operator represents a key's relationship to a set of values.
-                                              Valid operators are In, NotIn, Exists and DoesNotExist.
+                                              operator .
                                             type: string
                                           values:
                                             description: |-
-                                              values is an array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. This array is replaced during a strategic
-                                              merge patch.
+                                              values is .
                                             items:
                                               type: string
                                             type: array
@@ -664,28 +500,19 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: |-
-                                        matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                        map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                        operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                        matchLabels.
                                       type: object
                                   type: object
                                   x-kubernetes-map-type: atomic
                                 namespaces:
                                   description: |-
-                                    namespaces specifies a static list of namespace names that the term applies to.
-                                    The term is applied to the union of the namespaces listed in this field
-                                    and the ones selected by namespaceSelector.
-                                    null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+                                    namespaces.
                                   items:
                                     type: string
                                   type: array
                                 topologyKey:
                                   description: |-
-                                    This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
-                                    the labelSelector in the specified namespaces, where co-located is defined as running on a node
-                                    whose value of the label with key topologyKey matches that of any node on which any of the
-                                    selected pods is running.
-                                    Empty topologyKey is not allowed.
+                                    This pod.
                                   type: string
                               required:
                               - topologyKey
@@ -699,15 +526,7 @@ spec:
                         properties:
                           preferredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              The scheduler will prefer to schedule pods to nodes that satisfy
-                              the anti-affinity expressions specified by this field, but it may choose
-                              a node that violates one or more of the expressions. The node that is
-                              most preferred is the one with the greatest sum of weights, i.e.
-                              for each node that meets all of the scheduling requirements (resource
-                              request, requiredDuringScheduling anti-affinity expressions, etc.),
-                              compute a sum by iterating through the elements of this field and adding
-                              "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
-                              node(s) with the highest sum are the most preferred.
+                              The scheduler.
                             items:
                               description: The weights of all of the matched WeightedPodAffinityTerm
                                 fields are added per-node to find the most preferred
@@ -758,49 +577,27 @@ spec:
                                           additionalProperties:
                                             type: string
                                           description: |-
-                                            matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                            map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                            operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                            matchLabels.
                                           type: object
                                       type: object
                                       x-kubernetes-map-type: atomic
                                     matchLabelKeys:
                                       description: |-
-                                        MatchLabelKeys is a set of pod label keys to select which pods will
-                                        be taken into consideration. The keys are used to lookup values from the
-                                        incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
-                                        to select the group of existing pods which pods will be taken into consideration
-                                        for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                        pod labels will be ignored. The default value is empty.
-                                        The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                        Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                        This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                        MatchLabelKeys.
                                       items:
                                         type: string
                                       type: array
                                       x-kubernetes-list-type: atomic
                                     mismatchLabelKeys:
                                       description: |-
-                                        MismatchLabelKeys is a set of pod label keys to select which pods will
-                                        be taken into consideration. The keys are used to lookup values from the
-                                        incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                        to select the group of existing pods which pods will be taken into consideration
-                                        for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                        pod labels will be ignored. The default value is empty.
-                                        The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                        Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                        This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                        MismatchLabelKeys.
                                       items:
                                         type: string
                                       type: array
                                       x-kubernetes-list-type: atomic
                                     namespaceSelector:
                                       description: |-
-                                        A label query over the set of namespaces that the term applies to.
-                                        The term is applied to the union of the namespaces selected by this field
-                                        and the ones listed in the namespaces field.
-                                        null selector and null or empty namespaces list means "this pod's namespace".
-                                        An empty selector ({}) matches all namespaces.
+                                        A label .
                                       properties:
                                         matchExpressions:
                                           description: matchExpressions is a list
@@ -817,15 +614,11 @@ spec:
                                                 type: string
                                               operator:
                                                 description: |-
-                                                  operator represents a key's relationship to a set of values.
-                                                  Valid operators are In, NotIn, Exists and DoesNotExist.
+                                                  operator.
                                                 type: string
                                               values:
                                                 description: |-
-                                                  values is an array of string values. If the operator is In or NotIn,
-                                                  the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                                  the values array must be empty. This array is replaced during a strategic
-                                                  merge patch.
+                                                  values.
                                                 items:
                                                   type: string
                                                 type: array
@@ -838,28 +631,19 @@ spec:
                                           additionalProperties:
                                             type: string
                                           description: |-
-                                            matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                            map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                            operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                            matchLabels.
                                           type: object
                                       type: object
                                       x-kubernetes-map-type: atomic
                                     namespaces:
                                       description: |-
-                                        namespaces specifies a static list of namespace names that the term applies to.
-                                        The term is applied to the union of the namespaces listed in this field
-                                        and the ones selected by namespaceSelector.
-                                        null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+                                        namespaces.
                                       items:
                                         type: string
                                       type: array
                                     topologyKey:
                                       description: |-
-                                        This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
-                                        the labelSelector in the specified namespaces, where co-located is defined as running on a node
-                                        whose value of the label with key topologyKey matches that of any node on which any of the
-                                        selected pods is running.
-                                        Empty topologyKey is not allowed.
+                                        This.
                                       type: string
                                   required:
                                   - topologyKey
@@ -877,26 +661,14 @@ spec:
                             type: array
                           requiredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              If the anti-affinity requirements specified by this field are not met at
-                              scheduling time, the pod will not be scheduled onto the node.
-                              If the anti-affinity requirements specified by this field cease to be met
-                              at some point during pod execution (e.g. due to a pod label update), the
-                              system may or may not try to eventually evict the pod from its node.
-                              When there are multiple elements, the lists of nodes corresponding to each
-                              podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                              If.
                             items:
                               description: |-
-                                Defines a set of pods (namely those matching the labelSelector
-                                relative to the given namespace(s)) that this pod should be
-                                co-located (affinity) or not co-located (anti-affinity) with,
-                                where co-located is defined as running on a node whose value of
-                                the label with key <topologyKey> matches that of any node on which
-                                a pod of the set of pods is running
+                                Defines
                               properties:
                                 labelSelector:
                                   description: |-
-                                    A label query over a set of resources, in this case pods.
-                                    If it's null, this PodAffinityTerm matches with no Pods.
+                                    A label.
                                   properties:
                                     matchExpressions:
                                       description: matchExpressions is a list of label
@@ -918,10 +690,7 @@ spec:
                                             type: string
                                           values:
                                             description: |-
-                                              values is an array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. This array is replaced during a strategic
-                                              merge patch.
+                                              values.
                                             items:
                                               type: string
                                             type: array
@@ -934,49 +703,27 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: |-
-                                        matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                        map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                        operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                        matchLabels.
                                       type: object
                                   type: object
                                   x-kubernetes-map-type: atomic
                                 matchLabelKeys:
                                   description: |-
-                                    MatchLabelKeys is a set of pod label keys to select which pods will
-                                    be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
-                                    to select the group of existing pods which pods will be taken into consideration
-                                    for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                    pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                    Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    MatchLabelKeys.
                                   items:
                                     type: string
                                   type: array
                                   x-kubernetes-list-type: atomic
                                 mismatchLabelKeys:
                                   description: |-
-                                    MismatchLabelKeys is a set of pod label keys to select which pods will
-                                    be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                    to select the group of existing pods which pods will be taken into consideration
-                                    for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                    pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                    Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    MismatchLabelKeys.
                                   items:
                                     type: string
                                   type: array
                                   x-kubernetes-list-type: atomic
                                 namespaceSelector:
                                   description: |-
-                                    A label query over the set of namespaces that the term applies to.
-                                    The term is applied to the union of the namespaces selected by this field
-                                    and the ones listed in the namespaces field.
-                                    null selector and null or empty namespaces list means "this pod's namespace".
-                                    An empty selector ({}) matches all namespaces.
+                                    A label.
                                   properties:
                                     matchExpressions:
                                       description: matchExpressions is a list of label
@@ -998,10 +745,7 @@ spec:
                                             type: string
                                           values:
                                             description: |-
-                                              values is an array of string values. If the operator is In or NotIn,
-                                              the values array must be non-empty. If the operator is Exists or DoesNotExist,
-                                              the values array must be empty. This array is replaced during a strategic
-                                              merge patch.
+                                              values.
                                             items:
                                               type: string
                                             type: array
@@ -1014,28 +758,19 @@ spec:
                                       additionalProperties:
                                         type: string
                                       description: |-
-                                        matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
-                                        map is equivalent to an element of matchExpressions, whose key field is "key", the
-                                        operator is "In", and the values array contains only "value". The requirements are ANDed.
+                                        matchLabels.
                                       type: object
                                   type: object
                                   x-kubernetes-map-type: atomic
                                 namespaces:
                                   description: |-
-                                    namespaces specifies a static list of namespace names that the term applies to.
-                                    The term is applied to the union of the namespaces listed in this field
-                                    and the ones selected by namespaceSelector.
-                                    null or empty namespaces list and null namespaceSelector means "this pod's namespace".
+                                    namespaces.
                                   items:
                                     type: string
                                   type: array
                                 topologyKey:
                                   description: |-
-                                    This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
-                                    the labelSelector in the specified namespaces, where co-located is defined as running on a node
-                                    whose value of the label with key topologyKey matches that of any node on which any of the
-                                    selected pods is running.
-                                    Empty topologyKey is not allowed.
+                                    This.
                                   type: string
                               required:
                               - topologyKey
@@ -1132,15 +867,7 @@ spec:
                           type: string
                         value:
                           description: |-
-                            Variable references $(VAR_NAME) are expanded
-                            using the previously defined environment variables in the container and
-                            any service environment variables. If a variable cannot be resolved,
-                            the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-                            "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-                            Escaped references will never be expanded, regardless of whether the variable
-                            exists or not.
-                            Defaults to "".
+                            Variabl.
                           type: string
                         valueFrom:
                           description: Source for the environment variable's value.
@@ -1349,27 +1076,13 @@ spec:
                       properties:
                         args:
                           description: |-
-                            Arguments to the entrypoint.
-                            The container image's CMD is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            Arguments to the entrypoin
                           items:
                             type: string
                           type: array
                         command:
                           description: |-
                             Entrypoint array. Not executed within a shell.
-                            The container image's ENTRYPOINT is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
                           items:
                             type: string
                           type: array
@@ -1387,15 +1100,7 @@ spec:
                                 type: string
                               value:
                                 description: |-
-                                  Variable references $(VAR_NAME) are expanded
-                                  using the previously defined environment variables in the container and
-                                  any service environment variables. If a variable cannot be resolved,
-                                  the reference in the input string will be unchanged. Double $$ are reduced
-                                  to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-                                  "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-                                  Escaped references will never be expanded, regardless of whether the variable
-                                  exists or not.
-                                  Defaults to "".
+                                  Variable
                                 type: string
                               valueFrom:
                                 description: Source for the environment variable's
@@ -1491,12 +1196,7 @@ spec:
                           type: array
                         envFrom:
                           description: |-
-                            List of sources to populate environment variables in the container.
-                            The keys defined within a source must be a C_IDENTIFIER. All invalid keys
-                            will be reported as an event when the container is starting. When a key exists in multiple
-                            sources, the value associated with the last source will take precedence.
-                            Values defined by an Env with a duplicate key will take precedence.
-                            Cannot be updated.
+                            List of sources.
                           items:
                             description: EnvFromSource represents the source of a
                               set of ConfigMaps
@@ -1559,21 +1259,14 @@ spec:
                           properties:
                             postStart:
                               description: |-
-                                PostStart is called immediately after a container is created. If the handler fails,
-                                the container is terminated and restarted according to its restart policy.
-                                Other management of the container blocks until the hook completes.
-                                More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                                PostStart
                               properties:
                                 exec:
                                   description: Exec specifies the action to take.
                                   properties:
                                     command:
                                       description: |-
-                                        Command is the command line to execute inside the container, the working directory for the
-                                        command  is root ('/') in the container's filesystem. The command is simply exec'd, it is
-                                        not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use
-                                        a shell, you need to explicitly call out to that shell.
-                                        Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
+                                        Command .
                                       items:
                                         type: string
                                       type: array
@@ -1664,26 +1357,14 @@ spec:
                               type: object
                             preStop:
                               description: |-
-                                PreStop is called immediately before a container is terminated due to an
-                                API request or management event such as liveness/startup probe failure,
-                                preemption, resource contention, etc. The handler is not called if the
-                                container crashes or exits. The Pod's termination grace period countdown begins before the
-                                PreStop hook is executed. Regardless of the outcome of the handler, the
-                                container will eventually terminate within the Pod's termination grace
-                                period (unless delayed by finalizers). Other management of the container blocks until the hook completes
-                                or until the termination grace period is reached.
-                                More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                                PreStop
                               properties:
                                 exec:
                                   description: Exec specifies the action to take.
                                   properties:
                                     command:
                                       description: |-
-                                        Command is the command line to execute inside the container, the working directory for the
-                                        command  is root ('/') in the container's filesystem. The command is simply exec'd, it is
-                                        not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use
-                                        a shell, you need to explicitly call out to that shell.
-                                        Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
+                                        Command.
                                       items:
                                         type: string
                                       type: array
@@ -1785,11 +1466,7 @@ spec:
                               properties:
                                 command:
                                   description: |-
-                                    Command is the command line to execute inside the container, the working directory for the
-                                    command  is root ('/') in the container's filesystem. The command is simply exec'd, it is
-                                    not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use
-                                    a shell, you need to explicitly call out to that shell.
-                                    Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
+                                    Command.
                                   items:
                                     type: string
                                   type: array
@@ -1811,11 +1488,7 @@ spec:
                                   type: integer
                                 service:
                                   description: |-
-                                    Service is the name of the service to place in the gRPC HealthCheckRequest
-                                    (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
-
-
-                                    If this is not specified, the default behavior is defined by gRPC.
+                                    Service.
                                   type: string
                               required:
                               - port
@@ -1908,16 +1581,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -1936,13 +1600,7 @@ spec:
                           type: string
                         ports:
                           description: |-
-                            List of ports to expose from the container. Not specifying a port here
-                            DOES NOT prevent that port from being exposed. Any port which is
-                            listening on the default "0.0.0.0" address inside a container will be
-                            accessible from the network.
-                            Modifying this array with strategic merge patch may corrupt the data.
-                            For more information See https://github.com/kubernetes/kubernetes/issues/108255.
-                            Cannot be updated.
+                            List
                           items:
                             description: ContainerPort represents a network port in
                               a single container.
@@ -1997,11 +1655,7 @@ spec:
                               properties:
                                 command:
                                   description: |-
-                                    Command is the command line to execute inside the container, the working directory for the
-                                    command  is root ('/') in the container's filesystem. The command is simply exec'd, it is
-                                    not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use
-                                    a shell, you need to explicitly call out to that shell.
-                                    Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
+                                    Command .
                                   items:
                                     type: string
                                   type: array
@@ -2120,16 +1774,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional.
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -2223,21 +1868,7 @@ spec:
                           type: object
                         restartPolicy:
                           description: |-
-                            RestartPolicy defines the restart behavior of individual containers in a pod.
-                            This field may only be set for init containers, and the only allowed value is "Always".
-                            For non-init containers or when this field is not specified,
-                            the restart behavior is defined by the Pod's restart policy and the container type.
-                            Setting the RestartPolicy as "Always" for the init container will have the following effect:
-                            this init container will be continually restarted on
-                            exit until all regular containers have terminated. Once all regular
-                            containers have completed, all init containers with restartPolicy "Always"
-                            will be shut down. This lifecycle differs from normal init containers and
-                            is often referred to as a "sidecar" container. Although this init
-                            container still starts in the init container sequence, it does not wait
-                            for the container to complete before proceeding to the next init
-                            container. Instead, the next init container starts immediately after this
-                            init container is started, or after any startupProbe has successfully
-                            completed.
+                            RestartPolicy.
                           type: string
                         securityContext:
                           description: |-
@@ -2247,13 +1878,7 @@ spec:
                           properties:
                             allowPrivilegeEscalation:
                               description: |-
-                                AllowPrivilegeEscalation controls whether a process can gain more
-                                privileges than its parent process. This bool directly controls if
-                                the no_new_privs flag will be set on the container process.
-                                AllowPrivilegeEscalation is true always when the container is:
-                                1) run as Privileged
-                                2) has CAP_SYS_ADMIN
-                                Note that this field cannot be set when spec.os.name is windows.
+                                AllowPrivilegeEscalation.
                               type: boolean
                             capabilities:
                               description: |-
@@ -2299,38 +1924,21 @@ spec:
                               type: boolean
                             runAsGroup:
                               description: |-
-                                The GID to run the entrypoint of the container process.
-                                Uses runtime default if unset.
-                                May also be set in PodSecurityContext.  If set in both SecurityContext and
-                                PodSecurityContext, the value specified in SecurityContext takes precedence.
-                                Note that this field cannot be set when spec.os.name is windows.
+                                The GID.
                               format: int64
                               type: integer
                             runAsNonRoot:
                               description: |-
-                                Indicates that the container must run as a non-root user.
-                                If true, the Kubelet will validate the image at runtime to ensure that it
-                                does not run as UID 0 (root) and fail to start the container if it does.
-                                If unset or false, no such validation will be performed.
-                                May also be set in PodSecurityContext.  If set in both SecurityContext and
-                                PodSecurityContext, the value specified in SecurityContext takes precedence.
+                                Indicates 
                               type: boolean
                             runAsUser:
                               description: |-
-                                The UID to run the entrypoint of the container process.
-                                Defaults to user specified in image metadata if unspecified.
-                                May also be set in PodSecurityContext.  If set in both SecurityContext and
-                                PodSecurityContext, the value specified in SecurityContext takes precedence.
-                                Note that this field cannot be set when spec.os.name is windows.
+                                The UID.
                               format: int64
                               type: integer
                             seLinuxOptions:
                               description: |-
-                                The SELinux context to be applied to the container.
-                                If unspecified, the container runtime will allocate a random SELinux context for each
-                                container.  May also be set in PodSecurityContext.  If set in both SecurityContext and
-                                PodSecurityContext, the value specified in SecurityContext takes precedence.
-                                Note that this field cannot be set when spec.os.name is windows.
+                                The SELinux.
                               properties:
                                 level:
                                   description: Level is SELinux level label that applies
@@ -2358,30 +1966,18 @@ spec:
                               properties:
                                 localhostProfile:
                                   description: |-
-                                    localhostProfile indicates a profile defined in a file on the node should be used.
-                                    The profile must be preconfigured on the node to work.
-                                    Must be a descending path, relative to the kubelet's configured seccomp profile location.
-                                    Must be set if type is "Localhost". Must NOT be set for any other type.
+                                    localhostProfile.
                                   type: string
                                 type:
                                   description: |-
-                                    type indicates which kind of seccomp profile will be applied.
-                                    Valid options are:
-
-
-                                    Localhost - a profile defined in a file on the node should be used.
-                                    RuntimeDefault - the container runtime default profile should be used.
-                                    Unconfined - no profile should be applied.
+                                    type.
                                   type: string
                               required:
                               - type
                               type: object
                             windowsOptions:
                               description: |-
-                                The Windows specific settings applied to all containers.
-                                If unspecified, the options from the PodSecurityContext will be used.
-                                If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
-                                Note that this field cannot be set when spec.os.name is linux.
+                                The Windows.
                               properties:
                                 gmsaCredentialSpec:
                                   description: |-
@@ -2411,13 +2007,7 @@ spec:
                           type: object
                         startupProbe:
                           description: |-
-                            StartupProbe indicates that the Pod has successfully initialized.
-                            If specified, no other probes are executed until this completes successfully.
-                            If this probe fails, the Pod will be restarted, just as if the livenessProbe failed.
-                            This can be used to provide different probe parameters at the beginning of a Pod's lifecycle,
-                            when it might take a long time to load data or warm a cache, than during steady-state operation.
-                            This cannot be updated.
-                            More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+                            StartupProbe
                           properties:
                             exec:
                               description: Exec specifies the action to take.
@@ -2547,16 +2137,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -2575,33 +2156,15 @@ spec:
                           type: boolean
                         stdinOnce:
                           description: |-
-                            Whether the container runtime should close the stdin channel after it has been opened by
-                            a single attach. When stdin is true the stdin stream will remain open across multiple attach
-                            sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the
-                            first client attaches to stdin, and then remains open and accepts data until the client disconnects,
-                            at which time stdin is closed and remains closed until the container is restarted. If this
-                            flag is false, a container processes that reads from stdin will never receive an EOF.
-                            Default is false
+                            Whether
                           type: boolean
                         terminationMessagePath:
                           description: |-
-                            Optional: Path at which the file to which the container's termination message
-                            will be written is mounted into the container's filesystem.
-                            Message written is intended to be brief final status, such as an assertion failure message.
-                            Will be truncated by the node if greater than 4096 bytes. The total message length across
-                            all containers will be limited to 12kb.
-                            Defaults to /dev/termination-log.
-                            Cannot be updated.
+                            Optional: Path a
                           type: string
                         terminationMessagePolicy:
                           description: |-
-                            Indicate how the termination message should be populated. File will use the contents of
-                            terminationMessagePath to populate the container status message on both success and failure.
-                            FallbackToLogsOnError will use the last chunk of container log output if the termination
-                            message file is empty and the container exited with an error.
-                            The log output is limited to 2048 bytes or 80 lines, whichever is smaller.
-                            Defaults to File.
-                            Cannot be updated.
+                            Indicate 
                           type: string
                         tty:
                           description: |-
@@ -2808,15 +2371,7 @@ spec:
                         type: object
                       preStop:
                         description: |-
-                          PreStop is called immediately before a container is terminated due to an
-                          API request or management event such as liveness/startup probe failure,
-                          preemption, resource contention, etc. The handler is not called if the
-                          container crashes or exits. The Pod's termination grace period countdown begins before the
-                          PreStop hook is executed. Regardless of the outcome of the handler, the
-                          container will eventually terminate within the Pod's termination grace
-                          period (unless delayed by finalizers). Other management of the container blocks until the hook completes
-                          or until the termination grace period is reached.
-                          More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                          PreStop 
                         properties:
                           exec:
                             description: Exec specifies the action to take.
@@ -2980,12 +2535,7 @@ spec:
                         type: integer
                       runAsNonRoot:
                         description: |-
-                          Indicates that the container must run as a non-root user.
-                          If true, the Kubelet will validate the image at runtime to ensure that it
-                          does not run as UID 0 (root) and fail to start the container if it does.
-                          If unset or false, no such validation will be performed.
-                          May also be set in SecurityContext.  If set in both SecurityContext and
-                          PodSecurityContext, the value specified in SecurityContext takes precedence.
+                          Indicates
                         type: boolean
                       runAsUser:
                         description: |-
@@ -3063,9 +2613,7 @@ spec:
                         type: array
                       sysctls:
                         description: |-
-                          Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
-                          sysctls (by the container runtime) might fail to launch.
-                          Note that this field cannot be set when spec.os.name is windows.
+                          Sysctls 
                         items:
                           description: Sysctl defines a kernel parameter to be set
                           properties:
@@ -3359,27 +2907,13 @@ spec:
                       properties:
                         args:
                           description: |-
-                            Arguments to the entrypoint.
-                            The container image's CMD is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            Arguments to the entrypoint
                           items:
                             type: string
                           type: array
                         command:
                           description: |-
-                            Entrypoint array. Not executed within a shell.
-                            The container image's ENTRYPOINT is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            Entrypoint array.
                           items:
                             type: string
                           type: array
@@ -3397,15 +2931,7 @@ spec:
                                 type: string
                               value:
                                 description: |-
-                                  Variable references $(VAR_NAME) are expanded
-                                  using the previously defined environment variables in the container and
-                                  any service environment variables. If a variable cannot be resolved,
-                                  the reference in the input string will be unchanged. Double $$ are reduced
-                                  to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-                                  "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-                                  Escaped references will never be expanded, regardless of whether the variable
-                                  exists or not.
-                                  Defaults to "".
+                                  Variable 
                                 type: string
                               valueFrom:
                                 description: Source for the environment variable's
@@ -3501,12 +3027,7 @@ spec:
                           type: array
                         envFrom:
                           description: |-
-                            List of sources to populate environment variables in the container.
-                            The keys defined within a source must be a C_IDENTIFIER. All invalid keys
-                            will be reported as an event when the container is starting. When a key exists in multiple
-                            sources, the value associated with the last source will take precedence.
-                            Values defined by an Env with a duplicate key will take precedence.
-                            Cannot be updated.
+                            List of .
                           items:
                             description: EnvFromSource represents the source of a
                               set of ConfigMaps
@@ -3674,15 +3195,7 @@ spec:
                               type: object
                             preStop:
                               description: |-
-                                PreStop is called immediately before a container is terminated due to an
-                                API request or management event such as liveness/startup probe failure,
-                                preemption, resource contention, etc. The handler is not called if the
-                                container crashes or exits. The Pod's termination grace period countdown begins before the
-                                PreStop hook is executed. Regardless of the outcome of the handler, the
-                                container will eventually terminate within the Pod's termination grace
-                                period (unless delayed by finalizers). Other management of the container blocks until the hook completes
-                                or until the termination grace period is reached.
-                                More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                                PreStop
                               properties:
                                 exec:
                                   description: Exec specifies the action to take.
@@ -3918,16 +3431,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional .
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -3946,13 +3450,7 @@ spec:
                           type: string
                         ports:
                           description: |-
-                            List of ports to expose from the container. Not specifying a port here
-                            DOES NOT prevent that port from being exposed. Any port which is
-                            listening on the default "0.0.0.0" address inside a container will be
-                            accessible from the network.
-                            Modifying this array with strategic merge patch may corrupt the data.
-                            For more information See https://github.com/kubernetes/kubernetes/issues/108255.
-                            Cannot be updated.
+                            List of .
                           items:
                             description: ContainerPort represents a network port in
                               a single container.
@@ -4130,16 +3628,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional.
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -4233,21 +3722,7 @@ spec:
                           type: object
                         restartPolicy:
                           description: |-
-                            RestartPolicy defines the restart behavior of individual containers in a pod.
-                            This field may only be set for init containers, and the only allowed value is "Always".
-                            For non-init containers or when this field is not specified,
-                            the restart behavior is defined by the Pod's restart policy and the container type.
-                            Setting the RestartPolicy as "Always" for the init container will have the following effect:
-                            this init container will be continually restarted on
-                            exit until all regular containers have terminated. Once all regular
-                            containers have completed, all init containers with restartPolicy "Always"
-                            will be shut down. This lifecycle differs from normal init containers and
-                            is often referred to as a "sidecar" container. Although this init
-                            container still starts in the init container sequence, it does not wait
-                            for the container to complete before proceeding to the next init
-                            container. Instead, the next init container starts immediately after this
-                            init container is started, or after any startupProbe has successfully
-                            completed.
+                            RestartPolicy.
                           type: string
                         securityContext:
                           description: |-
@@ -4421,24 +3896,14 @@ spec:
                           type: object
                         startupProbe:
                           description: |-
-                            StartupProbe indicates that the Pod has successfully initialized.
-                            If specified, no other probes are executed until this completes successfully.
-                            If this probe fails, the Pod will be restarted, just as if the livenessProbe failed.
-                            This can be used to provide different probe parameters at the beginning of a Pod's lifecycle,
-                            when it might take a long time to load data or warm a cache, than during steady-state operation.
-                            This cannot be updated.
-                            More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+                            StartupProbe
                           properties:
                             exec:
                               description: Exec specifies the action to take.
                               properties:
                                 command:
                                   description: |-
-                                    Command is the command line to execute inside the container, the working directory for the
-                                    command  is root ('/') in the container's filesystem. The command is simply exec'd, it is
-                                    not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use
-                                    a shell, you need to explicitly call out to that shell.
-                                    Exit status of 0 is treated as live/healthy and non-zero is unhealthy.
+                                    Command.
                                   items:
                                     type: string
                                   type: array
@@ -4557,16 +4022,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional.
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -4585,33 +4041,15 @@ spec:
                           type: boolean
                         stdinOnce:
                           description: |-
-                            Whether the container runtime should close the stdin channel after it has been opened by
-                            a single attach. When stdin is true the stdin stream will remain open across multiple attach
-                            sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the
-                            first client attaches to stdin, and then remains open and accepts data until the client disconnects,
-                            at which time stdin is closed and remains closed until the container is restarted. If this
-                            flag is false, a container processes that reads from stdin will never receive an EOF.
-                            Default is false
+                            Whether 
                           type: boolean
                         terminationMessagePath:
                           description: |-
-                            Optional: Path at which the file to which the container's termination message
-                            will be written is mounted into the container's filesystem.
-                            Message written is intended to be brief final status, such as an assertion failure message.
-                            Will be truncated by the node if greater than 4096 bytes. The total message length across
-                            all containers will be limited to 12kb.
-                            Defaults to /dev/termination-log.
-                            Cannot be updated.
+                            Optional: Path 
                           type: string
                         terminationMessagePolicy:
                           description: |-
-                            Indicate how the termination message should be populated. File will use the contents of
-                            terminationMessagePath to populate the container status message on both success and failure.
-                            FallbackToLogsOnError will use the last chunk of container log output if the termination
-                            message file is empty and the container exited with an error.
-                            The log output is limited to 2048 bytes or 80 lines, whichever is smaller.
-                            Defaults to File.
-                            Cannot be updated.
+                            Indicate .
                           type: string
                         tty:
                           description: |-
@@ -4910,15 +4348,7 @@ spec:
                         properties:
                           preferredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              The scheduler will prefer to schedule pods to nodes that satisfy
-                              the affinity expressions specified by this field, but it may choose
-                              a node that violates one or more of the expressions. The node that is
-                              most preferred is the one with the greatest sum of weights, i.e.
-                              for each node that meets all of the scheduling requirements (resource
-                              request, requiredDuringScheduling affinity expressions, etc.),
-                              compute a sum by iterating through the elements of this field and adding
-                              "weight" to the sum if the node matches the corresponding matchExpressions; the
-                              node(s) with the highest sum are the most preferred.
+                              The scheduler .
                             items:
                               description: |-
                                 An empty preferred scheduling term matches all objects with implicit weight 0
@@ -5100,15 +4530,7 @@ spec:
                         properties:
                           preferredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              The scheduler will prefer to schedule pods to nodes that satisfy
-                              the affinity expressions specified by this field, but it may choose
-                              a node that violates one or more of the expressions. The node that is
-                              most preferred is the one with the greatest sum of weights, i.e.
-                              for each node that meets all of the scheduling requirements (resource
-                              request, requiredDuringScheduling affinity expressions, etc.),
-                              compute a sum by iterating through the elements of this field and adding
-                              "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
-                              node(s) with the highest sum are the most preferred.
+                              The scheduler .
                             items:
                               description: The weights of all of the matched WeightedPodAffinityTerm
                                 fields are added per-node to find the most preferred
@@ -5182,15 +4604,7 @@ spec:
                                       x-kubernetes-list-type: atomic
                                     mismatchLabelKeys:
                                       description: |-
-                                        MismatchLabelKeys is a set of pod label keys to select which pods will
-                                        be taken into consideration. The keys are used to lookup values from the
-                                        incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                        to select the group of existing pods which pods will be taken into consideration
-                                        for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                        pod labels will be ignored. The default value is empty.
-                                        The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                        Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                        This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                        MismatchLabelKeys.
                                       items:
                                         type: string
                                       type: array
@@ -5358,15 +4772,7 @@ spec:
                                   x-kubernetes-list-type: atomic
                                 mismatchLabelKeys:
                                   description: |-
-                                    MismatchLabelKeys is a set of pod label keys to select which pods will
-                                    be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                    to select the group of existing pods which pods will be taken into consideration
-                                    for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                    pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                    Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    MismatchLabelKeys .
                                   items:
                                     type: string
                                   type: array
@@ -5532,15 +4938,7 @@ spec:
                                       x-kubernetes-list-type: atomic
                                     mismatchLabelKeys:
                                       description: |-
-                                        MismatchLabelKeys is a set of pod label keys to select which pods will
-                                        be taken into consideration. The keys are used to lookup values from the
-                                        incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                        to select the group of existing pods which pods will be taken into consideration
-                                        for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                        pod labels will be ignored. The default value is empty.
-                                        The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                        Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                        This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                        MismatchLabelKeys.
                                       items:
                                         type: string
                                       type: array
@@ -5628,13 +5026,7 @@ spec:
                             type: array
                           requiredDuringSchedulingIgnoredDuringExecution:
                             description: |-
-                              If the anti-affinity requirements specified by this field are not met at
-                              scheduling time, the pod will not be scheduled onto the node.
-                              If the anti-affinity requirements specified by this field cease to be met
-                              at some point during pod execution (e.g. due to a pod label update), the
-                              system may or may not try to eventually evict the pod from its node.
-                              When there are multiple elements, the lists of nodes corresponding to each
-                              podAffinityTerm are intersected, i.e. all terms must be satisfied.
+                              If the.
                             items:
                               description: |-
                                 Defines a set of pods (namely those matching the labelSelector
@@ -5708,15 +5100,7 @@ spec:
                                   x-kubernetes-list-type: atomic
                                 mismatchLabelKeys:
                                   description: |-
-                                    MismatchLabelKeys is a set of pod label keys to select which pods will
-                                    be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
-                                    to select the group of existing pods which pods will be taken into consideration
-                                    for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
-                                    pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                    Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    MismatchLabelKeys
                                   items:
                                     type: string
                                   type: array
@@ -5888,15 +5272,7 @@ spec:
                           type: string
                         value:
                           description: |-
-                            Variable references $(VAR_NAME) are expanded
-                            using the previously defined environment variables in the container and
-                            any service environment variables. If a variable cannot be resolved,
-                            the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-                            "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-                            Escaped references will never be expanded, regardless of whether the variable
-                            exists or not.
-                            Defaults to "".
+                            Variable references 
                           type: string
                         valueFrom:
                           description: Source for the environment variable's value.
@@ -6106,26 +5482,13 @@ spec:
                         args:
                           description: |-
                             Arguments to the entrypoint.
-                            The container image's CMD is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            The container image's CMD i
                           items:
                             type: string
                           type: array
                         command:
                           description: |-
-                            Entrypoint array. Not executed within a shell.
-                            The container image's ENTRYPOINT is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            Entrypoint array.
                           items:
                             type: string
                           type: array
@@ -6143,15 +5506,7 @@ spec:
                                 type: string
                               value:
                                 description: |-
-                                  Variable references $(VAR_NAME) are expanded
-                                  using the previously defined environment variables in the container and
-                                  any service environment variables. If a variable cannot be resolved,
-                                  the reference in the input string will be unchanged. Double $$ are reduced
-                                  to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-                                  "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-                                  Escaped references will never be expanded, regardless of whether the variable
-                                  exists or not.
-                                  Defaults to "".
+                                  Variable.
                                 type: string
                               valueFrom:
                                 description: Source for the environment variable's
@@ -6420,15 +5775,7 @@ spec:
                               type: object
                             preStop:
                               description: |-
-                                PreStop is called immediately before a container is terminated due to an
-                                API request or management event such as liveness/startup probe failure,
-                                preemption, resource contention, etc. The handler is not called if the
-                                container crashes or exits. The Pod's termination grace period countdown begins before the
-                                PreStop hook is executed. Regardless of the outcome of the handler, the
-                                container will eventually terminate within the Pod's termination grace
-                                period (unless delayed by finalizers). Other management of the container blocks until the hook completes
-                                or until the termination grace period is reached.
-                                More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                                PreStop is
                               properties:
                                 exec:
                                   description: Exec specifies the action to take.
@@ -6664,16 +6011,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional 
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -6692,13 +6030,7 @@ spec:
                           type: string
                         ports:
                           description: |-
-                            List of ports to expose from the container. Not specifying a port here
-                            DOES NOT prevent that port from being exposed. Any port which is
-                            listening on the default "0.0.0.0" address inside a container will be
-                            accessible from the network.
-                            Modifying this array with strategic merge patch may corrupt the data.
-                            For more information See https://github.com/kubernetes/kubernetes/issues/108255.
-                            Cannot be updated.
+                            List of.
                           items:
                             description: ContainerPort represents a network port in
                               a single container.
@@ -6876,16 +6208,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional.
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -6979,21 +6302,7 @@ spec:
                           type: object
                         restartPolicy:
                           description: |-
-                            RestartPolicy defines the restart behavior of individual containers in a pod.
-                            This field may only be set for init containers, and the only allowed value is "Always".
-                            For non-init containers or when this field is not specified,
-                            the restart behavior is defined by the Pod's restart policy and the container type.
-                            Setting the RestartPolicy as "Always" for the init container will have the following effect:
-                            this init container will be continually restarted on
-                            exit until all regular containers have terminated. Once all regular
-                            containers have completed, all init containers with restartPolicy "Always"
-                            will be shut down. This lifecycle differs from normal init containers and
-                            is often referred to as a "sidecar" container. Although this init
-                            container still starts in the init container sequence, it does not wait
-                            for the container to complete before proceeding to the next init
-                            container. Instead, the next init container starts immediately after this
-                            init container is started, or after any startupProbe has successfully
-                            completed.
+                            RestartPolicy.
                           type: string
                         securityContext:
                           description: |-
@@ -7331,23 +6640,11 @@ spec:
                           type: boolean
                         stdinOnce:
                           description: |-
-                            Whether the container runtime should close the stdin channel after it has been opened by
-                            a single attach. When stdin is true the stdin stream will remain open across multiple attach
-                            sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the
-                            first client attaches to stdin, and then remains open and accepts data until the client disconnects,
-                            at which time stdin is closed and remains closed until the container is restarted. If this
-                            flag is false, a container processes that reads from stdin will never receive an EOF.
-                            Default is false
+                            Whether 
                           type: boolean
                         terminationMessagePath:
                           description: |-
-                            Optional: Path at which the file to which the container's termination message
-                            will be written is mounted into the container's filesystem.
-                            Message written is intended to be brief final status, such as an assertion failure message.
-                            Will be truncated by the node if greater than 4096 bytes. The total message length across
-                            all containers will be limited to 12kb.
-                            Defaults to /dev/termination-log.
-                            Cannot be updated.
+                            Optional: Path .
                           type: string
                         terminationMessagePolicy:
                           description: |-
@@ -7564,15 +6861,7 @@ spec:
                         type: object
                       preStop:
                         description: |-
-                          PreStop is called immediately before a container is terminated due to an
-                          API request or management event such as liveness/startup probe failure,
-                          preemption, resource contention, etc. The handler is not called if the
-                          container crashes or exits. The Pod's termination grace period countdown begins before the
-                          PreStop hook is executed. Regardless of the outcome of the handler, the
-                          container will eventually terminate within the Pod's termination grace
-                          period (unless delayed by finalizers). Other management of the container blocks until the hook completes
-                          or until the termination grace period is reached.
-                          More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                          PreStop 
                         properties:
                           exec:
                             description: Exec specifies the action to take.
@@ -7692,18 +6981,7 @@ spec:
                     properties:
                       fsGroup:
                         description: |-
-                          A special supplemental group that applies to all containers in a pod.
-                          Some volume types allow the Kubelet to change the ownership of that volume
-                          to be owned by the pod:
-
-
-                          1. The owning GID will be the FSGroup
-                          2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
-                          3. The permission bits are OR'd with rw-rw----
-
-
-                          If unset, the Kubelet will not modify the ownership and permissions of any volume.
-                          Note that this field cannot be set when spec.os.name is windows.
+                          A special
                         format: int64
                         type: integer
                       fsGroupChangePolicy:
@@ -8093,27 +7371,13 @@ spec:
                       properties:
                         args:
                           description: |-
-                            Arguments to the entrypoint.
-                            The container image's CMD is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            Arguments to the entrypoint
                           items:
                             type: string
                           type: array
                         command:
                           description: |-
-                            Entrypoint array. Not executed within a shell.
-                            The container image's ENTRYPOINT is used if this is not provided.
-                            Variable references $(VAR_NAME) are expanded using the container's environment. If a variable
-                            cannot be resolved, the reference in the input string will be unchanged. Double $$ are reduced
-                            to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will
-                            produce the string literal "$(VAR_NAME)". Escaped references will never be expanded, regardless
-                            of whether the variable exists or not. Cannot be updated.
-                            More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+                            Entrypoint array.
                           items:
                             type: string
                           type: array
@@ -8131,15 +7395,7 @@ spec:
                                 type: string
                               value:
                                 description: |-
-                                  Variable references $(VAR_NAME) are expanded
-                                  using the previously defined environment variables in the container and
-                                  any service environment variables. If a variable cannot be resolved,
-                                  the reference in the input string will be unchanged. Double $$ are reduced
-                                  to a single $, which allows for escaping the $(VAR_NAME) syntax: i.e.
-                                  "$$(VAR_NAME)" will produce the string literal "$(VAR_NAME)".
-                                  Escaped references will never be expanded, regardless of whether the variable
-                                  exists or not.
-                                  Defaults to "".
+                                  Variable
                                 type: string
                               valueFrom:
                                 description: Source for the environment variable's
@@ -8235,12 +7491,7 @@ spec:
                           type: array
                         envFrom:
                           description: |-
-                            List of sources to populate environment variables in the container.
-                            The keys defined within a source must be a C_IDENTIFIER. All invalid keys
-                            will be reported as an event when the container is starting. When a key exists in multiple
-                            sources, the value associated with the last source will take precedence.
-                            Values defined by an Env with a duplicate key will take precedence.
-                            Cannot be updated.
+                            List of.
                           items:
                             description: EnvFromSource represents the source of a
                               set of ConfigMaps
@@ -8408,15 +7659,7 @@ spec:
                               type: object
                             preStop:
                               description: |-
-                                PreStop is called immediately before a container is terminated due to an
-                                API request or management event such as liveness/startup probe failure,
-                                preemption, resource contention, etc. The handler is not called if the
-                                container crashes or exits. The Pod's termination grace period countdown begins before the
-                                PreStop hook is executed. Regardless of the outcome of the handler, the
-                                container will eventually terminate within the Pod's termination grace
-                                period (unless delayed by finalizers). Other management of the container blocks until the hook completes
-                                or until the termination grace period is reached.
-                                More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+                                PreStop
                               properties:
                                 exec:
                                   description: Exec specifies the action to take.
@@ -8864,16 +8107,7 @@ spec:
                               type: object
                             terminationGracePeriodSeconds:
                               description: |-
-                                Optional duration in seconds the pod needs to terminate gracefully upon probe failure.
-                                The grace period is the duration in seconds after the processes running in the pod are sent
-                                a termination signal and the time when the processes are forcibly halted with a kill signal.
-                                Set this value longer than the expected cleanup time for your process.
-                                If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this
-                                value overrides the value provided by the pod spec.
-                                Value must be non-negative integer. The value zero indicates stop immediately via
-                                the kill signal (no opportunity to shut down).
-                                This is a beta field and requires enabling ProbeTerminationGracePeriod feature gate.
-                                Minimum value is 1. spec.terminationGracePeriodSeconds is used if unset.
+                                Optional
                               format: int64
                               type: integer
                             timeoutSeconds:
@@ -8967,21 +8201,7 @@ spec:
                           type: object
                         restartPolicy:
                           description: |-
-                            RestartPolicy defines the restart behavior of individual containers in a pod.
-                            This field may only be set for init containers, and the only allowed value is "Always".
-                            For non-init containers or when this field is not specified,
-                            the restart behavior is defined by the Pod's restart policy and the container type.
-                            Setting the RestartPolicy as "Always" for the init container will have the following effect:
-                            this init container will be continually restarted on
-                            exit until all regular containers have terminated. Once all regular
-                            containers have completed, all init containers with restartPolicy "Always"
-                            will be shut down. This lifecycle differs from normal init containers and
-                            is often referred to as a "sidecar" container. Although this init
-                            container still starts in the init container sequence, it does not wait
-                            for the container to complete before proceeding to the next init
-                            container. Instead, the next init container starts immediately after this
-                            init container is started, or after any startupProbe has successfully
-                            completed.
+                            RestartPolicy.
                           type: string
                         securityContext:
                           description: |-
@@ -9319,33 +8539,15 @@ spec:
                           type: boolean
                         stdinOnce:
                           description: |-
-                            Whether the container runtime should close the stdin channel after it has been opened by
-                            a single attach. When stdin is true the stdin stream will remain open across multiple attach
-                            sessions. If stdinOnce is set to true, stdin is opened on container start, is empty until the
-                            first client attaches to stdin, and then remains open and accepts data until the client disconnects,
-                            at which time stdin is closed and remains closed until the container is restarted. If this
-                            flag is false, a container processes that reads from stdin will never receive an EOF.
-                            Default is false
+                            Whether
                           type: boolean
                         terminationMessagePath:
                           description: |-
-                            Optional: Path at which the file to which the container's termination message
-                            will be written is mounted into the container's filesystem.
-                            Message written is intended to be brief final status, such as an assertion failure message.
-                            Will be truncated by the node if greater than 4096 bytes. The total message length across
-                            all containers will be limited to 12kb.
-                            Defaults to /dev/termination-log.
-                            Cannot be updated.
+                            Optional: Path .
                           type: string
                         terminationMessagePolicy:
                           description: |-
-                            Indicate how the termination message should be populated. File will use the contents of
-                            terminationMessagePath to populate the container status message on both success and failure.
-                            FallbackToLogsOnError will use the last chunk of container log output if the termination
-                            message file is empty and the container exited with an error.
-                            The log output is limited to 2048 bytes or 80 lines, whichever is smaller.
-                            Defaults to File.
-                            Cannot be updated.
+                            Indicate how .
                           type: string
                         tty:
                           description: |-
@@ -10241,30 +9443,7 @@ spec:
                       properties:
                         volumeClaimTemplate:
                           description: |-
-                            Will be used to create a stand-alone PVC to provision the volume.
-                            The pod in which this EphemeralVolumeSource is embedded will be the
-                            owner of the PVC, i.e. the PVC will be deleted together with the
-                            pod.  The name of the PVC will be `<pod name>-<volume name>` where
-                            `<volume name>` is the name from the `PodSpec.Volumes` array
-                            entry. Pod validation will reject the pod if the concatenated name
-                            is not valid for a PVC (for example, too long).
-
-
-                            An existing PVC with that name that is not owned by the pod
-                            will *not* be used for the pod to avoid using an unrelated
-                            volume by mistake. Starting the pod is then blocked until
-                            the unrelated PVC is removed. If such a pre-created PVC is
-                            meant to be used by the pod, the PVC has to updated with an
-                            owner reference to the pod once the pod exists. Normally
-                            this should not be necessary, but it may be useful when
-                            manually reconstructing a broken cluster.
-
-
-                            This field is read-only and no changes will be made by Kubernetes
-                            to the PVC after it has been created.
-
-
-                            Required, must not be nil.
+                            Will.
                           properties:
                             metadata:
                               description: |-
@@ -10335,29 +9514,7 @@ spec:
                                   x-kubernetes-map-type: atomic
                                 dataSourceRef:
                                   description: |-
-                                    dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
-                                    volume is desired. This may be any object from a non-empty API group (non
-                                    core object) or a PersistentVolumeClaim object.
-                                    When this field is specified, volume binding will only succeed if the type of
-                                    the specified object matches some installed volume populator or dynamic
-                                    provisioner.
-                                    This field will replace the functionality of the dataSource field and as such
-                                    if both fields are non-empty, they must have the same value. For backwards
-                                    compatibility, when namespace isn't specified in dataSourceRef,
-                                    both fields (dataSource and dataSourceRef) will be set to the same
-                                    value automatically if one of them is empty and the other is non-empty.
-                                    When namespace is specified in dataSourceRef,
-                                    dataSource isn't set to the same value and must be empty.
-                                    There are three important differences between dataSource and dataSourceRef:
-                                    * While dataSource only allows two specific types of objects, dataSourceRef
-                                      allows any non-core object, as well as PersistentVolumeClaim objects.
-                                    * While dataSource ignores disallowed values (dropping them), dataSourceRef
-                                      preserves all values, and generates an error if a disallowed value is
-                                      specified.
-                                    * While dataSource only allows local objects, dataSourceRef allows objects
-                                      in any namespaces.
-                                    (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.
-                                    (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
+                                    dataSourceRef 
                                   properties:
                                     apiGroup:
                                       description: |-
@@ -10469,18 +9626,7 @@ spec:
                                   type: string
                                 volumeAttributesClassName:
                                   description: |-
-                                    volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
-                                    If specified, the CSI driver will create or update the volume with the attributes defined
-                                    in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
-                                    it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
-                                    will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
-                                    If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
-                                    will be set by the persistentvolume controller if it exists.
-                                    If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
-                                    set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
-                                    exists.
-                                    More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass
-                                    (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+                                    volumeAt
                                   type: string
                                 volumeMode:
                                   description: |-
